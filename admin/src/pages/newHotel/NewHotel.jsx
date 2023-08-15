@@ -12,7 +12,7 @@ const NewHotel = () => {
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
 
-  const { data, loading, error } = useFetch("/rooms");
+  const { data, loading } = useFetch("/rooms");
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -25,9 +25,9 @@ const NewHotel = () => {
     );
     setRooms(value);
   };
-  
-  console.log(files)
 
+  console.log(files);
+  const URL = "";
   const handleClick = async (e) => {
     e.preventDefault();
     try {
@@ -37,7 +37,7 @@ const NewHotel = () => {
           data.append("file", file);
           data.append("upload_preset", "upload");
           const uploadRes = await axios.post(
-            "https://api.cloudinary.com/v1_1/lamadev/image/upload",
+            "https://api.cloudinary.com/v1_1/dqfucs6i5/image/upload",
             data
           );
 
@@ -52,8 +52,10 @@ const NewHotel = () => {
         photos: list,
       };
 
-      await axios.post("/hotels", newhotel);
-    } catch (err) {console.log(err)}
+      await axios.post(URL + "/hotels", newhotel);
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="new">

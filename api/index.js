@@ -23,11 +23,16 @@ const connect = async () => {
 mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected!");
 });
-
+const corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept",
+};
 //middlewares
-app.use(cors())
-app.use(cookieParser())
+app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
@@ -45,7 +50,10 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(8800, () => {
+app.listen(process.env.PORT || 8800, () => {
   connect();
   console.log("Connected to backend.");
 });
+// mongoose.connect(process.env.MONGO).then((res)=>{
+//   app.listen(process.env.PORT || 8800)
+// })

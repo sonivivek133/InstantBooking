@@ -12,7 +12,7 @@ const New = ({ inputs, title }) => {
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
-
+  const URL = "";
   const handleClick = async (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -20,7 +20,7 @@ const New = ({ inputs, title }) => {
     data.append("upload_preset", "upload");
     try {
       const uploadRes = await axios.post(
-        "https://api.cloudinary.com/v1_1/upload/image/upload",
+        "https://api.cloudinary.com/v1_1/dqfucs6i5/image/upload",
         data
       );
 
@@ -31,7 +31,7 @@ const New = ({ inputs, title }) => {
         img: url,
       };
 
-      await axios.post("/auth/register", newUser);
+      await axios.post(URL + "/auth/register", newUser);
     } catch (err) {
       console.log(err);
     }
@@ -92,5 +92,3 @@ const New = ({ inputs, title }) => {
 };
 
 export default New;
-
-

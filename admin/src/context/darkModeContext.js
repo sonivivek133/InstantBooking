@@ -14,5 +14,4 @@ export const DarkModeContextProvider = ({ children }) => {
     <DarkModeContext.Provider value={{ darkMode: state.darkMode, dispatch }}>
       {children}
     </DarkModeContext.Provider>
-  );
-};
+  );};
